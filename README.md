@@ -1,4 +1,6 @@
 Credit Score Classification App
+# Title
+
 This is a web application that predicts the credit score classification based on user input. The application is built using Flask for the backend and AngularJS for handling the frontend interactions.
 
 Features
