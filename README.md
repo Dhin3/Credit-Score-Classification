@@ -13,7 +13,7 @@ This is a web application that predicts the credit score classification based on
 
 - **Backend**: Flask
 - **Frontend**: AngularJS
-- **Styling**: CSS (with a Montserrat font from Google Fonts)
+- **Styling**: CSS 
 
 ## Backend (Flask)
 
