@@ -1,52 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Form</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
             color: white;
-            background-image: url('../static/wallpaperflare.com_wallpaper.jpg');
+            background-image: url('/static/wallpaperflare.com_wallpaper.jpg');
             background-position: center;
             background-size: cover;
             height: 100%;
-            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .container {
-            width: 700px;
+            width: 600px;
+            height: 750px;
             border: 2px solid black;
             border-radius: 15px;
             padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             background-color: rgba(0, 0, 0, 0.7);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin-top: 30px;
         }
-
         .grid-tab {
             width: 100%;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 20px;
+            grid-template-columns: 1fr 1.5fr;
+            grid-column-gap: 70px;
+            grid-row-gap: 15px;
         }
-
         label {
             margin-bottom: 5px;
             font-weight: 500;
         }
-
-        input, select {
+        .grid-tab > input, select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -56,14 +51,12 @@
             font-family: 'Montserrat', sans-serif;
             transition: background-color 0.3s ease, border 0.3s ease;
         }
-
         input:hover, select:hover {
             background-color: #f0f0f0;
             border-color: #888;
         }
-
         .Buttons {
-            background-color: rgb(31, 85, 234);
+            background-color: rgb(41, 81, 189);
             color: aliceblue;
             font-weight: bold;
             border: none;
@@ -71,53 +64,96 @@
             border-radius: 6px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease, padding-left 0.25s, padding-right 0.25s;
-            font-family: 'Montserrat', sans-serif;
-            width: auto;
         }
-
         .Buttons:hover {
-            background-color:  rgb(41, 81, 189) ;
-            color: white;
-            padding-left: 30px;
-            padding-right: 30px;
+            background-color: #fff;
+            color: black;
+            padding: 10px 30px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+            font-weight: bold;
         }
 
-        form {
-            width: 100%;
+        .button-sec{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: baseline;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('myApp', [])
+        .controller('MainController', function($scope, $http) {
+            $scope.prediction = '';
+
+            $scope.clear = function(){
+                $scope.chkacct = '';
+                $scope.duration = '';
+                $scope.balanceInSavings = '';
+                $scope.history = '';
+                $scope.creditAmount = '';
+                $scope.purposeofcredit = '';
+                $scope.age = '';
+                $scope.install_rate = '';
+                $scope.RealEstate = '';
+                $scope.prediction = '';
+            }
+
+            $scope.submitForm = function() {
+                var formData = {
+                    chkacct: $scope.chkacct,
+                    duration: $scope.duration,
+                    balanceInSavings: $scope.balanceInSavings,
+                    history: $scope.history,
+                    creditAmount: $scope.creditAmount,
+                    purposeofcredit: $scope.purposeofcredit,
+                    age: $scope.age,
+                    install_rate: $scope.install_rate,
+                    RealEstate: $scope.RealEstate
+                };
+                $http.post('/', formData).then(function(response) {
+                    $scope.prediction = response.data.prediction;
+                }, function(error) {
+                    console.log(error);
+                });
+            };
+        });
+    </script>
 </head>
-<body>
+<body ng-controller="MainController">
     <div class="container">
-        <form action="/" method="post">
+        <form ng-submit="submitForm()">
             <div class="grid-tab">
                 <label for="chkacct">Checking Account:</label>
-                <select id="chkacct" name="chkacct">
+                <select id="chkacct" ng-model="chkacct" required>
                     <option value="2">no-account</option>
                     <option value="0">0DM</option>
                     <option value="1">less-200DM</option>
                     <option value="3">over-200DM</option>
                 </select>
-
                 <label for="balanceInSavings">Balance in Savings A/C:</label>
-                <select id="balanceInSavings" name="balanceInSavings">
+                <select id="balanceInSavings" ng-model="balanceInSavings" required>
                     <option value="0">unknown</option>
                     <option value="1">less100DM</option>
                     <option value="2">less1000DM</option>
                     <option value="3">over1000DM</option>
                 </select>
-
                 <label for="history">History:</label>
-                <select id="history" name="history">
+                <select id="history" ng-model="history" required>
                     <option value="0">critical</option>
                     <option value="1">duly-till-now</option>
                     <option value="2">delay</option>
                     <option value="3">all-paid-duly</option>
                     <option value="4">bank-paid-duly</option>
                 </select>
-
                 <label for="purposeofcredit">Purpose of Credit:</label>
-                <select id="purposeofcredit" name="purposeofcredit">
+                <select id="purposeofcredit" ng-model="purposeofcredit" required>
                     <option value="0">radio-tv</option>
                     <option value="1">education</option>
                     <option value="2">furniture</option>
@@ -129,31 +165,42 @@
                     <option value="9">retraining</option>
                     <option value="8">others</option>
                 </select>
-
                 <label for="RealEstate">Real Estate:</label>
-                <select id="RealEstate" name="RealEstate">
+                <select id="RealEstate" ng-model="RealEstate" required>
                     <option value="0">real-estate</option>
                     <option value="1">building-society</option>
                     <option value="3">car</option>
                     <option value="2">none</option>
                 </select>
-
                 <label for="duration">Duration (months):</label>
-                <input type="number" id="duration" name="duration" min="1" value="1">
-
+                <input type="number" id="duration" ng-model="duration" min="1" required>
                 <label for="creditAmount">Credit Amount:</label>
-                <input type="number" id="creditAmount" name="creditAmount" value="0">
-
+                <input type="number" id="creditAmount" ng-model="creditAmount" required>
                 <label for="age">Age:</label>
-                <input type="number" id="age" name="age" min="18" value="18">
-
+                <input type="number" id="age" ng-model="age" min="18" required>
                 <label for="install_rate">Installment Rate:</label>
-                <input type="number" id="install_rate" name="install_rate" value="1">
+                <input type="number" id="install_rate" ng-model="install_rate" required>
             </div>
-            <center>
-                <input class="Buttons" type="submit" value="Submit" style="margin-top: 20px;">
-            </center>
+            <div class="button-sec">
+                <div style="width: 150px;">
+                    <center>
+                        <button class="Buttons" type="submit">Submit</button>
+                    </center>
+                </div>
+                <div style="width: 150px;">
+                    <center>
+                        <input type="button" class="Buttons" ng-click="clear()" value="clear">
+                    </center>
+                </div>
+            </div>
+            
         </form>
+        <div style="height: 50px;">
+            <div ng-show="prediction" class="result">
+                Your Credit is <span ng-bind="prediction"></span> as per our model.
+            </div>
+        </div>
+        
     </div>
 </body>
 </html>
