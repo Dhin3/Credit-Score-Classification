@@ -15,6 +15,14 @@ This is a web application that predicts the credit score classification based on
 - **Frontend**: AngularJS
 - **Styling**: CSS (with a Montserrat font from Google Fonts)
 
+## Backend (Flask)
+
+- **app.py**: The main Flask application file handling form submission and prediction.
+
+## Frontend (AngularJS)
+
+- **form.html**: The HTML file containing the form and AngularJS code to handle form submission and display of the result.
+
 ## Project Structure
 
 ```plaintext
@@ -42,14 +50,6 @@ This is a web application that predicts the credit score classification based on
 - **Credit Amount**: Number input for the credit amount.
 - **Age**: Number input for the age.
 - **Installment Rate**: Number input for the installment rate.
-
-## Backend (Flask)
-
-- **app.py**: The main Flask application file handling form submission and prediction.
-
-## Frontend (AngularJS)
-
-- **form.html**: The HTML file containing the form and AngularJS code to handle form submission and display of the result.
 
 ## Usage
 
