@@ -29,6 +29,8 @@ This is a web application that predicts the credit score classification based on
 ├── requirements.txt
 └── README.md
 
+```
+
 ## Form Fields
 
 - **Checking Account**: Dropdown with options for different account statuses.
@@ -85,5 +87,6 @@ This is a web application that predicts the credit score classification based on
     ```
 
 5. **Open the application in your browser**:
-
+    ```sh
     Go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
+    ```
