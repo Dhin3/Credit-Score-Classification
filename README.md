@@ -70,6 +70,7 @@ This is a web application that predicts the credit score classification based on
 2. **Create a virtual environment and activate it**:
 
     ```sh
+    Set-ExecutionPolicy RemoteSigned -Scope Process
     python -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
