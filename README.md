@@ -77,7 +77,7 @@ This is a web application that predicts the credit score classification based on
 3. **Install the dependencies**:
 
     ```sh
-    pip install -r requirements.txt
+    pip install -r .\requirments.txt
     ```
 
 4. **Run the Flask app**:
